@@ -1,13 +1,13 @@
 <template>
-  <div class="lo"></div>
+  <div class="shopcarContainer"></div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'ShopcarContainer',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+
     }
   }
 }
