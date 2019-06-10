@@ -1,16 +1,18 @@
 <template>
   <div class="homeContainer">
     <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="(item) in lunboList"
-                     :key='item.id'>
+      <mt-swipe-item v-for='(item,i) in lunbo'
+                     :key='i'>
         <img :src="item.url">
       </mt-swipe-item>
     </mt-swipe>
     <ul class="mui-table-view mui-grid-view mui-grid-9">
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <router-link to="/home/newslist">
           <img src="../../assets/images/发现.png">
           <div class="mui-media-body">新闻资讯</div>
-        </a></li>
+        </router-link>
+      </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
           <img src="../../assets/images/直播.png">
           <div class="mui-media-body">图片分享</div>
@@ -40,20 +42,19 @@ export default {
   name: 'HomeContainer',
   data () {
     return {
-      lunboList: []
+      lunbo: [
+        {
+          url: require('../../assets/images/2019-05-31-23-34-22.jpg')
+        },
+        {
+          url: require('../../assets/images/2019-05-31-23-34-22.jpg')
+        }
+      ]
     }
   },
   methods: {
-    getLunbotu () {
-      this.$ajax
-        .get('http://127.0.0.1/getLunbotu')
-        .then(response => {
-          this.lunboList = response.data
-        })
-    }
   },
   created () {
-    this.getLunbotu()
   }
 }
 </script>
