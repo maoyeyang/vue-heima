@@ -13,8 +13,8 @@
            v-for="(item,i) in comments"
            :key='item.id'>
         <div class="cmt-title">
-          <span>第{{i+1}}楼 用户 :{{item.username}}</span>
-          <span>发表时间:{{item.time}}</span>
+          <span>第{{i+1}}楼 用户 :{{item.user_name}}</span>
+          <span>发表时间:{{item.add_time |dateFormat}}</span>
         </div>
         <div class="cmt-body">{{item.content}}</div>
       </div>
@@ -39,22 +39,34 @@ export default {
   methods: {
     getComments () {
       // console.log(this.pageIndex)
-      this.$ajax.get('comments/getcomments/' + this.artid + '?pageindex=' + this.pageIndex)
+      this.$ajax.get('api/getcomments/' + this.artid + '?pageindex=' + this.pageIndex)
         .then(res => {
-          this.comments = res.data.data.comments
-          this.pageIndex = res.data.data.pageindex
+          this.comments = this.comments.concat(res.data.message)
         })
     },
     addComment () {
-
+      if (this.text.trim() === '') {
+        return
+      }
+      this.$ajax.post('api/postcomment/' + this.artid, { content: this.text })
+        .then(res => {
+          let newcomment = {
+            user_name: '匿名用户',
+            add_time: Date.now(),
+            content: this.text.trim()
+          }
+          this.comments.unshift(newcomment)
+          this.text = ''
+          this.$toast({
+            message: res.data.message,
+            position: 'middle',
+            duration: 500
+          })
+        })
     },
     moreComment () {
       this.pageIndex++
-      this.$ajax.get('comments/getcomments/' + this.artid + '?pageindex=' + this.pageIndex)
-        .then(res => {
-          this.comments = this.comments.concat(res.data.data.comments)
-          this.pageIndex = res.data.data.pageindex
-        })
+      this.getComments()
     }
   },
   created () {

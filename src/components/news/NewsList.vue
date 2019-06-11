@@ -1,17 +1,16 @@
 <template>
   <div>
-    <ul class="mui-table-view mui-table-view-chevron">
+    <ul class="mui-table-view">
       <li class="mui-table-view-cell mui-media"
           v-for="(item) in newlist"
           :key="item.id">
-        <router-link class="mui-navigate-right"
-                     :to="'/home/newsinfo/'+item.id">
+        <router-link :to="'/home/newsinfo/'+item.id">
           <img class="mui-media-object mui-pull-left"
-               :src="require('../../assets/images/cbd.jpg')">
+               :src="item.img_url">
           <div class="mui-media-body">
             <h1>{{item.title}}</h1>
             <p class="mui-ellipsis">
-              <span>发表时间 : {{item.time}} </span>
+              <span>发表时间 : {{item.add_time | dateFormat}} </span>
               <span>点击:{{item.click}}次</span>
             </p>
           </div>
@@ -32,9 +31,9 @@ export default {
   methods: {
     getNewList () {
       this.$ajax
-        .get('news/getnewslist')
-        .then(response => {
-          this.newlist = response.data.data
+        .get('api/getnewslist')
+        .then(res => {
+          this.newlist = res.data.message
         })
     }
   },
@@ -54,6 +53,4 @@ export default {
       color: #226aff
       display: flex
       justify-content: space-between
-    a
-      padding-right: 45px
 </style>

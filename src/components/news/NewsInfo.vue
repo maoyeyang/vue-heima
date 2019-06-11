@@ -2,7 +2,7 @@
   <div class="newsinfo-container">
     <h1 class="title">{{newsinfo.title}}</h1>
     <p class="subtitle">
-      <span>发表时间:{{newsinfo.time}}</span>
+      <span>发表时间:{{newsinfo.add_time |dateFormat}}</span>
       <span>点击:{{newsinfo.click}}次</span>
     </p>
     <hr>
@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     getNewsInfo () {
-      this.$ajax.get('news/getnewsinfo/' + this.id).then(response => {
-        this.newsinfo = response.data.data
+      this.$ajax.get('api/getnew/' + this.id).then(res => {
+        this.newsinfo = res.data.message[0]
       })
     }
   },
@@ -55,5 +55,4 @@ export default {
     justify-content: space-between
   .content
     font-size: 13px
-    text-indent: 2em
 </style>

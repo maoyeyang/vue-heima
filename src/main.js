@@ -7,25 +7,29 @@ import {
   Header,
   Swipe,
   SwipeItem,
-  Toast,
-  Button
+  Button,
+  Toast
 } from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import './lib/mui/css/mui.css'
 import './lib/mui/css/icons-extra.css'
 import './lib/mui/fonts/mui-icons-extra.ttf'
+import mui from './lib/mui/js/mui.js'
 import axios from 'axios'
-// import './mock/index.js'
+import moment from 'moment'
 
 Vue.component(Header.name, Header)
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
-Vue.component(Toast.name, Toast)
 Vue.component(Button.name, Button)
 
-axios.defaults.baseURL = 'https://easy-mock.com/mock/5cfb4f328115d57ff6ad3759/api'
+axios.defaults.baseURL = 'http://www.liulongbin.top:3005'
+Vue.prototype.$toast = Toast
 Vue.prototype.$ajax = axios
-
+Vue.prototype.mui = mui
+Vue.filter('dateFormat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+  return moment(dataStr).format(pattern)
+})
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
