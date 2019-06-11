@@ -1,11 +1,7 @@
 <template>
   <div class="homeContainer">
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for='item in lunbotuList'
-                     :key='item.id'>
-        <img :src="item.img">
-      </mt-swipe-item>
-    </mt-swipe>
+    <swiper :lunbotuList="lunbotuList"
+            :isFull='true'></swiper>
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <router-link to="/home/newslist">
@@ -19,10 +15,12 @@
           <div class="mui-media-body">图片分享</div>
         </router-link>
       </li>
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <router-link to="/home/goodslist">
           <img src="../../assets/images/menu3.png">
           <div class="mui-media-body">商品购买</div>
-        </a></li>
+        </router-link>
+      </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
           <img src="../../assets/images/menu4.png">
           <div class="mui-media-body">留言反馈</div>
@@ -40,6 +38,7 @@
 </template>
 
 <script>
+import swiper from '../subcomponents/swiper'
 export default {
   name: 'HomeContainer',
   data () {
@@ -56,6 +55,9 @@ export default {
   },
   created () {
     this.getLunbotu()
+  },
+  components: {
+    swiper
   }
 }
 </script>

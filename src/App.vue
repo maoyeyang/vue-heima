@@ -46,6 +46,8 @@ body
   padding-top: 40px
   padding-bottom: 50px
   overflow-x: hidden
+#app .mint-header
+  z-index: 9999
 .v-enter
   opacity: 0
   transform: translateX(100%)

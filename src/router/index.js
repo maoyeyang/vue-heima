@@ -7,6 +7,11 @@ import SearchContainer from '@/components/tabbar/SearchContainer'
 import NewsList from '@/components/news/NewsList'
 import NewsInfo from '@/components/news/NewsInfo'
 import PhotoList from '@/components/photos/PhotoList'
+import PhotoInfo from '@/components/photos/PhotoInfo'
+import GoodsList from '@/components/goods/GoodsList'
+import GoodsInfo from '@/components/goods/GoodsInfo'
+import GoodsDesc from '@/components/goods/GoodsDesc'
+import GoodsComments from '@/components/goods/GoodsComments'
 
 Vue.use(Router)
 
@@ -47,6 +52,31 @@ export default new Router({
     path: '/home/photolist',
     name: 'PhotoList',
     component: PhotoList
+  },
+  {
+    path: '/home/photoinfo/:id',
+    name: 'PhotoInfo',
+    component: PhotoInfo
+  },
+  {
+    path: '/home/goodslist',
+    name: 'GoodsList',
+    component: GoodsList
+  },
+  {
+    path: '/home/goodsinfo/:id',
+    name: 'GoodsInfo',
+    component: GoodsInfo
+  },
+  {
+    path: '/home/goodsdesc/:id',
+    name: 'GoodsDesc',
+    component: GoodsDesc
+  },
+  {
+    path: '/home/goodscomments/:id',
+    name: 'GoodsComments',
+    component: GoodsComments
   }
   ],
   linkActiveClass: 'mui-active'

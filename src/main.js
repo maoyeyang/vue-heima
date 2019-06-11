@@ -3,13 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import {
-  Header,
-  Swipe,
-  SwipeItem,
-  Button,
-  Toast
-} from 'mint-ui'
+import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import './lib/mui/css/mui.css'
 import './lib/mui/css/icons-extra.css'
@@ -17,14 +11,13 @@ import './lib/mui/fonts/mui-icons-extra.ttf'
 import mui from './lib/mui/js/mui.js'
 import axios from 'axios'
 import moment from 'moment'
+import VuePreview from 'vue2-preview'
 
-Vue.component(Header.name, Header)
-Vue.component(Swipe.name, Swipe)
-Vue.component(SwipeItem.name, SwipeItem)
-Vue.component(Button.name, Button)
+Vue.use(MintUI)
+Vue.use(VuePreview)
 
 axios.defaults.baseURL = 'http://www.liulongbin.top:3005'
-Vue.prototype.$toast = Toast
+Vue.prototype.$toast = MintUI.Toast
 Vue.prototype.$ajax = axios
 Vue.prototype.mui = mui
 Vue.filter('dateFormat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
