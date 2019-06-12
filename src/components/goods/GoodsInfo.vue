@@ -5,7 +5,7 @@
                 @after-enter="afterEnter">
       <div class="ball"
            v-show="ballFlag"
-           ref="aaa"></div>
+           ref="ball"></div>
     </transition>
     <div class="mui-card">
       <div class="mui-card-content">
@@ -106,9 +106,13 @@ export default {
     },
     enter (el, done) {
       // el.offsetWidth
-      console.log(el.offsetWidth)
-      el.style.transform = 'translate(68px,180px)'
-      el.style.transition = 'all 1s ease'
+      let ballPosition = el.offsetWidth
+      ballPosition = this.$refs.ball.getBoundingClientRect()
+      const badgePosition = document.querySelector('#badge').getBoundingClientRect()
+      const xDist = badgePosition.left - ballPosition.left
+      const yDist = badgePosition.top - ballPosition.top
+      el.style.transform = `translate(${xDist}px,${yDist}px)`
+      el.style.transition = 'all 0.7s cubic-bezier(0.4,-0.3,1,0.68)'
       el.style.opacity = '1'
       done()
     },
@@ -120,9 +124,6 @@ export default {
   created () {
     this.getLunbotu()
     this.getGoodsInfo()
-  },
-  mounted () {
-    console.log(this)
   },
   components: {
     swiper,
