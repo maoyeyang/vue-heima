@@ -1,5 +1,5 @@
 <template>
-  <div class="memberContainer">aaaaa</div>
+  <div class="memberContainer">memberContainer</div>
 </template>
 
 <script>

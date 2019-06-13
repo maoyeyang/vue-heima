@@ -24,7 +24,8 @@
             销售价:<span class="now_pirce">¥{{goodsinfo.sell_price}}</span>
           </p>
           <p>购买数量:
-            <numbox></numbox>
+            <numbox @getcount="getSelectedCount"
+                    :max="goodsinfo.stock_quantity"></numbox>
           </p>
           <p>
             <mt-button type='primary'
@@ -66,10 +67,11 @@ export default {
   name: 'GoodsInfo',
   data () {
     return {
-      id: this.$route.params.id,
+      id: parseInt(this.$route.params.id),
       lunbotu: [],
       goodsinfo: {},
-      ballFlag: false
+      ballFlag: false,
+      selectedCount: 1
     }
   },
   methods: {
@@ -99,26 +101,37 @@ export default {
     },
     addToShopCar () {
       this.ballFlag = !this.ballFlag
+      let goodsinfo = {
+        id: this.id,
+        count: this.selectedCount,
+        price: this.goodsinfo.sell_price,
+        selected: true
+      }
+      setTimeout(() => {
+        this.$store.commit('addToCar', goodsinfo)
+      }, 500)
     },
     beforeEnter (el) {
       el.style.transform = 'translate(0,0)'
       el.style.opacity = '1'
     },
     enter (el, done) {
-      // el.offsetWidth
       let ballPosition = el.offsetWidth
       ballPosition = this.$refs.ball.getBoundingClientRect()
       const badgePosition = document.querySelector('#badge').getBoundingClientRect()
       const xDist = badgePosition.left - ballPosition.left
       const yDist = badgePosition.top - ballPosition.top
       el.style.transform = `translate(${xDist}px,${yDist}px)`
-      el.style.transition = 'all 0.7s cubic-bezier(0.4,-0.3,1,0.68)'
+      el.style.transition = 'all 0.5s cubic-bezier(0.4,-0.3,1,0.68)'
       el.style.opacity = '1'
       done()
     },
     afterEnter (el) {
       el.style.opacity = '1'
       this.ballFlag = !this.ballFlag
+    },
+    getSelectedCount (count) {
+      this.selectedCount = count
     }
   },
   created () {

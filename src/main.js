@@ -12,6 +12,7 @@ import mui from './lib/mui/js/mui.js'
 import axios from 'axios'
 import moment from 'moment'
 import VuePreview from 'vue2-preview'
+import store from './store'
 
 Vue.use(MintUI)
 Vue.use(VuePreview)
@@ -32,5 +33,6 @@ new Vue({
   components: {
     App
   },
-  template: '<App/>'
+  template: '<App/>',
+  store
 })
